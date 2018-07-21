@@ -54,45 +54,45 @@
         	
         	$("#itemEditWindow").window({
         		onLoad :function(){
-        			//回显数据
-        			var data = $("#itemList").datagrid("getSelections")[0];
-        			data.priceView = E3.formatPrice(data.price);
-        			$("#itemeEditForm").form("load",data);
-        			
-        			// 加载商品描述
-        			$.getJSON('/rest/item/query/item/desc/'+data.id,function(_data){
-        				if(_data.status == 200){
-        					//UM.getEditor('itemeEditDescEditor').setContent(_data.data.itemDesc, false);
-        					itemEditEditor.html(_data.data.itemDesc);
-        				}
-        			});
-        			
-        			//加载商品规格
+                        //回显数据
+                        var data = $("#itemList").datagrid("getSelections")[0];
+                        data.priceView = E3.formatPrice(data.price);
+                        $("#itemeEditForm").form("load",data);
+
+                        // 加载商品描述
+                        $.getJSON('/rest/item/query/item/desc/'+data.id,function(_data){
+                            if(_data.status == 200){
+                                //UM.getEditor('itemeEditDescEditor').setContent(_data.data.itemDesc, false);
+                                itemEditEditor.html(_data.data.itemDesc);
+                            }
+                        });
+
+                        //加载商品规格
         			$.getJSON('/rest/item/param/item/query/'+data.id,function(_data){
         				if(_data && _data.status == 200 && _data.data && _data.data.paramData){
         					$("#itemeEditForm .params").show();
         					$("#itemeEditForm [name=itemParams]").val(_data.data.paramData);
         					$("#itemeEditForm [name=itemParamId]").val(_data.data.id);
-        					
+
         					//回显商品规格
         					 var paramData = JSON.parse(_data.data.paramData);
-        					
+
         					 var html = "<ul>";
         					 for(var i in paramData){
         						 var pd = paramData[i];
         						 html+="<li><table>";
         						 html+="<tr><td colspan=\"2\" class=\"group\">"+pd.group+"</td></tr>";
-        						 
+
         						 for(var j in pd.params){
         							 var ps = pd.params[j];
         							 html+="<tr><td class=\"param\"><span>"+ps.k+"</span>: </td><td><input autocomplete=\"off\" type=\"text\" value='"+ps.v+"'/></td></tr>";
         						 }
-        						 
+
         						 html+="</li></table>";
         					 }
-        					 html+= "</ul>";
-        					 $("#itemeEditForm .params td").eq(1).html(html);
-        				}
+        			    	 html+= "</ul>";
+        		        	 $("#itemeEditForm .params td").eq(1).html(html);
+        			 	}
         			});
         			
         			E3.init({

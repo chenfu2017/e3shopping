@@ -37,4 +37,19 @@ public class ItemController {
         E3Result result = itemService.addItem(item, desc);
         return result;
     }
+
+    @RequestMapping("/rest/item/update")
+    @ResponseBody
+    public E3Result updateItem(TbItem item,String desc){
+        E3Result result = itemService.updateItem(item, desc);
+        return result;
+    }
+
+    @RequestMapping("/rest/item/delete")
+    @ResponseBody
+    public E3Result deleteItems(String ids){
+        E3Result result = itemService.deleteItems(ids);
+        return result;
+    }
+
 }

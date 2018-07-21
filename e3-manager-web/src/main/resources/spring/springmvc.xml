@@ -21,7 +21,7 @@
 	<mvc:resources mapping="/js/**" location="/js/"></mvc:resources>
 	<!-- 引用dubbo服务 -->
 	<dubbo:application name="e3-manager-web"/>
-	<dubbo:registry protocol="zookeeper" address="192.168.83.130:2181"/>
+	<dubbo:registry protocol="zookeeper" address="192.168.25.128:2181"/>
 	<dubbo:reference interface="cn.e3mall.service.ItemService" id="itemService" />
 	<dubbo:reference interface="cn.e3mall.service.ItemCatService" id="itemCatService" />
 </beans>
