@@ -67,7 +67,7 @@
                             }
                         });
 
-                        //加载商品规格
+                        加载商品规格
         			$.getJSON('/rest/item/param/item/query/'+data.id,function(_data){
         				if(_data && _data.status == 200 && _data.data && _data.data.paramData){
         					$("#itemeEditForm .params").show();

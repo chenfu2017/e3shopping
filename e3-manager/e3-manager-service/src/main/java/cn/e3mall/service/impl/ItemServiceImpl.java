@@ -86,4 +86,10 @@ public class ItemServiceImpl implements ItemService {
         }
         return E3Result.ok();
     }
+
+    @Override
+    public TbItemDesc getItemDesc(long id) {
+        TbItemDesc itemDesc = itemDescMapper.selectByPrimaryKey(id);
+        return itemDesc;
+    }
 }

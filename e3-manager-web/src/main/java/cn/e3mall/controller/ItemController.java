@@ -3,6 +3,7 @@ package cn.e3mall.controller;
 import cn.e3mall.common.pojo.EasyUIDataGridResult;
 import cn.e3mall.common.utils.E3Result;
 import cn.e3mall.pojo.TbItem;
+import cn.e3mall.pojo.TbItemDesc;
 import cn.e3mall.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,13 @@ public class ItemController {
     public E3Result deleteItems(String ids){
         E3Result result = itemService.deleteItems(ids);
         return result;
+    }
+
+    @RequestMapping("/rest/item/query/item/desc/")
+    @ResponseBody
+    public TbItemDesc getItemDesc(Long id){
+        TbItemDesc tbItemDesc  = itemService.getItemDesc(id);
+        return tbItemDesc;
     }
 
 }
