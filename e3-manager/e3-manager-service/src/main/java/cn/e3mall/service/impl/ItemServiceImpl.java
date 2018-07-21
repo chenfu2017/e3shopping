@@ -1,8 +1,12 @@
 package cn.e3mall.service.impl;
 
 import cn.e3mall.common.pojo.EasyUIDataGridResult;
+import cn.e3mall.common.utils.E3Result;
+import cn.e3mall.common.utils.IDUtils;
+import cn.e3mall.mapper.TbItemDescMapper;
 import cn.e3mall.mapper.TbItemMapper;
 import cn.e3mall.pojo.TbItem;
+import cn.e3mall.pojo.TbItemDesc;
 import cn.e3mall.pojo.TbItemExample;
 import cn.e3mall.service.ItemService;
 import com.github.pagehelper.PageHelper;
@@ -10,12 +14,15 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 @Service
 public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private TbItemMapper itemMapper;
+    @Autowired
+    private TbItemDescMapper itemDescMapper;
     @Override
     public TbItem getTbItemById(long itemId) {
         TbItemExample tbItemExample = new TbItemExample();
@@ -40,5 +47,23 @@ public class ItemServiceImpl implements ItemService {
         easyUIDataGridResult.setTotal(pageInfo.getTotal());
 
         return easyUIDataGridResult;
+    }
+
+    @Override
+    public E3Result addItem(TbItem item, String desc) {
+        long itemId = IDUtils.genItemId();
+        item.setId(itemId);
+        //1 正常  2 下架  3 删除
+        item.setStatus((byte) 1);
+        item.setCreated(new Date());
+        item.setUpdated(new Date());
+        itemMapper.insert(item);
+        TbItemDesc itemDesc = new TbItemDesc();
+        itemDesc.setItemId(itemId);
+        itemDesc.setCreated(new Date());
+        itemDesc.setUpdated(new Date());
+        itemDesc.setItemDesc(desc);
+        itemDescMapper.insert(itemDesc);
+        return E3Result.ok();
     }
 }
