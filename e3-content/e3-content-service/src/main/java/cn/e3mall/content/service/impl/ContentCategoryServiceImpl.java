@@ -55,4 +55,34 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 
         return E3Result.ok(contentCategory);
     }
+
+    @Override
+    public E3Result updateContentcategory(long id,String name) {
+
+        TbContentCategory contentCategory = contentCategoryMapper.selectByPrimaryKey(id);
+        contentCategory.setName(name);
+        contentCategoryMapper.updateByPrimaryKey(contentCategory);
+        return E3Result.ok();
+    }
+
+    @Override
+    public E3Result deleteContentcategory(long id) {
+        TbContentCategory contentCategory = contentCategoryMapper.selectByPrimaryKey(id);
+        if (contentCategory.getIsParent()) {
+            System.out.println("contentCategory 是父节点");
+            return new E3Result(304,"父节点不能删除",null);
+        }
+        long parentId = contentCategory.getParentId();
+        contentCategoryMapper.deleteByPrimaryKey(id);
+        TbContentCategoryExample example = new TbContentCategoryExample();
+        TbContentCategoryExample.Criteria criteria = example.createCriteria();
+        criteria.andParentIdEqualTo(parentId);
+        int count = contentCategoryMapper.countByExample(example);
+        if (count == 0) {
+            TbContentCategory parent = contentCategoryMapper.selectByPrimaryKey(parentId);
+            parent.setIsParent(false);
+            contentCategoryMapper.updateByPrimaryKey(parent);
+        }
+        return E3Result.ok();
+    }
 }

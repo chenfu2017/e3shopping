@@ -62,8 +62,10 @@ function menuHandler(item){
 	}else if(item.name === "delete"){
 		$.messager.confirm('确认','确定删除名为 '+node.text+' 的分类吗？',function(r){
 			if(r){
-				$.post("/content/category/delete/",{id:node.id},function(){
-					tree.tree("remove",node.target);
+				$.get("/content/category/delete/"+node.id,function(data){
+                    if(data.status == 200){
+                        tree.tree("remove",node.target);
+                        }
 				});	
 			}
 		});

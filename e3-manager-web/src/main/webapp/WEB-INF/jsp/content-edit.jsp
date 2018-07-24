@@ -75,7 +75,7 @@ var contentEditPage = {
 			});
 		},
 		clearForm : function(){
-			
+
 		}
 };
 
