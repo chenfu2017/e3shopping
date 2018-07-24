@@ -1,11 +1,14 @@
 package cn.e3mall.content.service.impl;
 
+import cn.e3mall.common.pojo.EasyUIDataGridResult;
 import cn.e3mall.common.pojo.EasyUITreeNode;
 import cn.e3mall.common.utils.E3Result;
 import cn.e3mall.content.service.ContentCategoryService;
 import cn.e3mall.mapper.TbContentCategoryMapper;
-import cn.e3mall.pojo.TbContentCategory;
-import cn.e3mall.pojo.TbContentCategoryExample;
+import cn.e3mall.mapper.TbContentMapper;
+import cn.e3mall.pojo.*;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,8 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 
     @Autowired
     private TbContentCategoryMapper contentCategoryMapper;
+    @Autowired
+    private TbContentMapper tbContentMapper;
     @Override
     public List<EasyUITreeNode> getContentCatList(long parentId) {
         TbContentCategoryExample example= new TbContentCategoryExample();
@@ -84,5 +89,19 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
             contentCategoryMapper.updateByPrimaryKey(parent);
         }
         return E3Result.ok();
+    }
+
+    @Override
+    public EasyUIDataGridResult getContentCatList(int page, int rows) {
+        PageHelper.startPage(page,rows);
+        TbItemExample tbItemExample = new TbItemExample();
+        TbContentExample example = new TbContentExample();
+        List<TbContent> tbContents = tbContentMapper.selectByExample(example);
+        EasyUIDataGridResult easyUIDataGridResult = new EasyUIDataGridResult();
+        easyUIDataGridResult.setRows(tbContents);
+        PageInfo<TbContent> pageInfo = new PageInfo<>(tbContents);
+        easyUIDataGridResult.setTotal(pageInfo.getTotal());
+
+        return easyUIDataGridResult;
     }
 }

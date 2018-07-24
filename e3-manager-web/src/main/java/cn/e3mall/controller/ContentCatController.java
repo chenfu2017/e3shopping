@@ -1,5 +1,6 @@
 package cn.e3mall.controller;
 
+import cn.e3mall.common.pojo.EasyUIDataGridResult;
 import cn.e3mall.common.pojo.EasyUITreeNode;
 import cn.e3mall.common.utils.E3Result;
 import cn.e3mall.content.service.ContentCategoryService;
@@ -42,5 +43,12 @@ public class ContentCatController {
     public E3Result deleteContentCategory(@PathVariable Long id) {
         E3Result e3Result = contentCategoryService.deleteContentcategory(id);
         return e3Result;
+    }
+
+    @RequestMapping("/content/query/list")
+    @ResponseBody
+    public EasyUIDataGridResult getContentCatList(Integer page, Integer rows){
+        EasyUIDataGridResult contentCatList = contentCategoryService.getContentCatList(page, rows);
+        return contentCatList;
     }
 }
