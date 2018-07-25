@@ -1,6 +1,7 @@
 package cn.e3mall.jedis;
 
 public class JedisClientTest {
+
 /*
 	@Test
 	public void testJedisClient() throws Exception {
