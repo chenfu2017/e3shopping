@@ -1,11 +1,7 @@
 package cn.e3mall.jedis;
 
-import org.junit.Test;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-
 public class JedisTest {
-
+/*
 	@Test
 	public void testJedis() throws Exception {
 		//创建一个连接Jedis对象，参数：host、port
@@ -17,7 +13,7 @@ public class JedisTest {
 		//关闭连接
 		jedis.close();
 	}
-	
+
 	@Test
 	public void testJedisPool() throws Exception {
 		//创建一个连接池对象，两个参数host、port
@@ -31,5 +27,5 @@ public class JedisTest {
 		jedis.close();
 		//关闭连接池。
 		jedisPool.close();
-	}
+	}*/
 }
