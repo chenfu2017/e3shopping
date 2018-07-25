@@ -30,6 +30,7 @@ public class SearchServiceImpl implements SearchService {
         long recordCount = searchResult.getRecordCount();
         int totalPage = (int) Math.ceil(recordCount / rows);
         searchResult.setTotalPages(totalPage);
+
         return searchResult;
     }
 }

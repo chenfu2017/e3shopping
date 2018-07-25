@@ -19,6 +19,8 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
+    <bean class="cn.e3mall.search.exception.GlobalExceptionResolver"></bean>
+
     <dubbo:application name="e3-portal-web"/>
     <dubbo:registry protocol="zookeeper" address="192.168.25.128:2181"/>
     <dubbo:reference interface="cn.e3mall.search.service.SearchService" id="searchService" />
