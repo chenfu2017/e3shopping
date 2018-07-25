@@ -31,13 +31,12 @@ public class SearchItemServiceImpl implements SearchItemService {
                 document.addField("item_image", searchItem.getImage());
                 document.addField("item_category_name", searchItem.getCategory_name());
                 solrServer.add(document);
-                return E3Result.ok();
             }
             solrServer.commit();
+            return E3Result.ok();
         } catch (Exception e) {
             e.printStackTrace();
             return E3Result.build(500, "数据导入时发生异常");
         }
-        return null;
     }
 }
