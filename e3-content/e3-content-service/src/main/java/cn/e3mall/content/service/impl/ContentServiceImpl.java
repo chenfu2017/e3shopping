@@ -31,6 +31,7 @@ public class ContentServiceImpl implements ContentService {
         content.setCreated(new Date());
         content.setUpdated(new Date());
         contentMapper.insertSelective(content);
+        jedisClient.hdel(CONTENT_LIST, content.getCategoryId().toString());
         return E3Result.ok();
     }
 
