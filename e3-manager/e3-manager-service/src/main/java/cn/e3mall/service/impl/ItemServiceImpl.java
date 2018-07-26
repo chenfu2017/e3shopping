@@ -12,8 +12,12 @@ import cn.e3mall.service.ItemService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import javax.jms.*;
 import java.util.Date;
 import java.util.List;
 @Service
@@ -23,6 +27,10 @@ public class ItemServiceImpl implements ItemService {
     private TbItemMapper itemMapper;
     @Autowired
     private TbItemDescMapper itemDescMapper;
+    @Autowired
+    private JmsTemplate jmsTemplate;
+    @Resource
+    private Destination topicDestination;
     @Override
     public TbItem getTbItemById(long itemId) {
         TbItemExample tbItemExample = new TbItemExample();
@@ -64,6 +72,13 @@ public class ItemServiceImpl implements ItemService {
         itemDesc.setUpdated(new Date());
         itemDesc.setItemDesc(desc);
         itemDescMapper.insert(itemDesc);
+        jmsTemplate.send(topicDestination, new MessageCreator() {
+            @Override
+            public Message createMessage(Session session) throws JMSException {
+                TextMessage textMessage = session.createTextMessage(itemId + "");
+                return textMessage;
+            }
+        });
         return E3Result.ok();
     }
 
