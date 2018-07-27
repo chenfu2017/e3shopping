@@ -153,13 +153,18 @@
             </div>
 		<div class="pView">
                                 <div id="pView">
-                <div id="zoom-jpg" class="jqzoom"></div>
+                <div id="zoom-jpg" class="jqzoom">
+                <img alt="" width="330" height="330" src="${item.images[0] }" jqimg="${item.images[0] }"/>
+                </div>
                 <div id="pic-list">
                     <a href="javascript:void(0);" class="btn-control disabled" id="btn-forward"><b></b></a>
                     <a href="javascript:void(0);" class="btn-control disabled" id="btn-backward"><b></b></a>
         
                     <div class="pic-items" style="position: absolute; width: 50px; height: 300px; overflow: hidden;">
                         <ul style="position: absolute; left: 0px; top: 0px; height: 240px;">
+                           <#list item.images as image>
+                           <li style="float: left;"><img title="${item.title } " alt="${item.title }" src="${image }"></li>
+                           </#list>
                         </ul>
                     </div>
                 </div>
