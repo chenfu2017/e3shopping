@@ -17,5 +17,25 @@
         <module>e3-cart-service</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.chenfu</groupId>
+            <artifactId>e3-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+    <!-- 配置tomcat插件 -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <configuration>
+                    <path>/</path>
+                    <port>8089</port>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

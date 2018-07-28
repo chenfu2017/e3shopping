@@ -14,6 +14,13 @@
 	
 	<context:component-scan base-package="cn.e3mall.cart.controller" />
 	<mvc:annotation-driven />
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="cn.e3mall.cart.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
@@ -23,4 +30,7 @@
 	<!-- 引用dubbo服务 -->
 	<dubbo:application name="e3-cart-web"/>
 	<dubbo:registry protocol="zookeeper" address="192.168.25.128:2181"/>
+    <dubbo:reference interface="cn.e3mall.service.ItemService" id="itemService"/>
+    <dubbo:reference interface="cn.e3mall.sso.service.TokenService" id="tokenService"/>
+    <dubbo:reference interface="cn.e3mall.cart.service.CartService" id="cartService"/>
 </beans>

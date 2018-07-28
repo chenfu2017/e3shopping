@@ -655,10 +655,8 @@ a.submit5:hover{color:#fff;background:url(../images/productinfo.png) no-repeat -
 .tabs1 a{display:block; text-align:center; float:left; height:20px;line-height:20px; text-decoration:none; white-space: nowrap; margin:0px 12px 0px 0px}
 .tabs1 a:hover{display:block; text-align:center; float:left; height:20px; text-decoration:underline;}
 .tabs1 a img{margin:0px 2px 0px 0px;vertical-align:middle;padding:0px;}
-
 .s9{}
 .s9 ul{}
-.s9 ul li{background:url(); padding:0px; margin:0px;}
 
 /*--------页脚----------*/
 .pageFooter{ width:1000px;margin:0 auto;}
@@ -1676,15 +1674,7 @@ cursor:pointer;filter:alpha(opacity=80);opacity:0.8;_bottom:auto;}
 .left-arrow,.right-arrow{
 	}
 
-.left-arrow{
-	background:url(<?php echo SF_STATIC_HTML_URL?>/images/404_03.jpg) no-repeat top left;
-	margin-left:15px;margin-top:90px;}
-	
-.right-arrow{
-	background:url(<?php echo SF_STATIC_HTML_URL?>/images/404_05.jpg) no-repeat top left;
-	margin-right:0;margin-top:90px;}
 
-	
 .fl-pic{
 	overflow: hidden;
 	width:800px;

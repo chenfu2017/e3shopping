@@ -17,18 +17,20 @@ public class TokenController {
 
     @Autowired
     private TokenService tokenService;
-    @RequestMapping(value = "/user/token/{token}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+
+
+/*    @RequestMapping(value = "/user/token/{token}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String getUserByToken(@PathVariable String token,String callback) {
         E3Result e3Result = tokenService.getUserByToken(token);
         if (StringUtils.isNotBlank(callback)) {
             return callback + "(" + JsonUtils.objectToJson(e3Result) + ")";
         }
         return JsonUtils.objectToJson(e3Result);
-    }
+    }*/
 
-/*    @RequestMapping(value = "/user/token/{token}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/user/token/{token}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public Object getUserByToken(@PathVariable String token,String callback) {
+    public Object getUserByToken(@PathVariable String token, String callback) {
         E3Result e3Result = tokenService.getUserByToken(token);
         if (StringUtils.isNotBlank(callback)) {
             MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(e3Result);
@@ -36,5 +38,5 @@ public class TokenController {
             return mappingJacksonValue;
         }
         return e3Result;
-    }*/
+    }
 }
